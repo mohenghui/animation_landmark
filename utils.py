@@ -62,12 +62,31 @@ def cal_point(point1,point2):
         x=(b2-b1)*1.0/(k1-k2)
     y=k1*x*1.0+b1*1.0
     return [x,y]
-# def load_annotation_image():
-#     img_dir, img_name = os.path.split(img_path)
-#     annotation_path = os.path.join(
-#     SplitData.annotation_path, os.path.splitext(img_name)[0]+annotation_tail)
-
-#     makedirR(SaveImage.save_path) #获取原图数据
-#     imagedecode(annotation_path,SaveImage.save_path)
+def cal_distance(point1,point2):
+    return pow(pow(point1[0]-point2[0],2)+pow(point1[1]-point2[1],2),1/2)
 
 
+def get_foot(start_point, end_point, point_a):
+    start_x, start_y = start_point
+    end_x, end_y = end_point
+    pa_x, pa_y = point_a
+
+    p_foot = [0, 0]
+    if start_point[0] == end_point[0]:
+        p_foot[0] = start_point[0]
+        p_foot[1] = point_a[1]
+        return p_foot
+
+    k = (end_y - start_y) * 1.0 / (end_x - start_x)
+    a = k
+    b = -1.0
+    c = start_y - k * start_x
+    p_foot[0] = int((b * b * pa_x - a * b * pa_y - a * c) / (a * a + b * b))
+    p_foot[1] = int((a * a * pa_y - a * b * pa_x - b * c) / (a * a + b * b))
+
+    return p_foot
+def sign_cal_distance(point1,point2):
+    if point1[1]<point2[1]:
+        return pow(pow(point1[0]-point2[0],2)+pow(point1[1]-point2[1],2),1/2)
+    else:
+        return -pow(pow(point1[0]-point2[0],2)+pow(point1[1]-point2[1],2),1/2)
