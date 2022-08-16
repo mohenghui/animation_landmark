@@ -1,4 +1,5 @@
 from cmath import inf
+from dis import dis
 import os
 import platform
 import base64
@@ -90,3 +91,7 @@ def sign_cal_distance(point1,point2):
         return pow(pow(point1[0]-point2[0],2)+pow(point1[1]-point2[1],2),1/2)
     else:
         return -pow(pow(point1[0]-point2[0],2)+pow(point1[1]-point2[1],2),1/2)
+
+def scale_distance(distance1,distance2,scale):
+    return True if distance1*scale<=distance2 or distance2*scale<=distance1 else False
+    
