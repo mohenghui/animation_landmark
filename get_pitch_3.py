@@ -69,7 +69,7 @@ if __name__ == '__main__':
         elif nose_chin_distance*0.8>=brow_nose_distance and nose_chin_distance*0.8>=forehead_distance:
             #抬头
             pitch_flag=2
-        elif nose_chin_distance*1.2<=brow_nose_distance and nose_chin_distance*1.2<=forehead_distance:
+        elif nose_chin_distance<=brow_nose_distance*0.8 and nose_chin_distance<=forehead_distance*0.8:
             #低头
             pitch_flag=1
         else:
@@ -78,9 +78,9 @@ if __name__ == '__main__':
         if pitch_flag==0:
             cv2.putText(og_img, 'ping' , (5, 55), cv2.FONT_HERSHEY_SIMPLEX, 0.5,(0, 0, 255))
         elif pitch_flag==1:
-            cv2.putText(og_img, 'di:' , (5, 55), cv2.FONT_HERSHEY_SIMPLEX, 0.5,(0, 0, 255))
+            cv2.putText(og_img, 'di' , (5, 55), cv2.FONT_HERSHEY_SIMPLEX, 0.5,(0, 0, 255))
         elif pitch_flag==2:
-            cv2.putText(og_img, 'tai:', (5, 55), cv2.FONT_HERSHEY_SIMPLEX, 0.5,(0, 0, 255))
+            cv2.putText(og_img, 'tai', (5, 55), cv2.FONT_HERSHEY_SIMPLEX, 0.5,(0, 0, 255))
         cv2.imshow('img', og_img)
         cv2.waitKey(0)
 

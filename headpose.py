@@ -131,7 +131,7 @@ class PoseEstimator:
         self.camera_matrix = np.array(  # 相机矩阵
             [[self.focal_length, 0, self.camera_center[0]],  # w,0,w_center
              [0, self.focal_length, self.camera_center[1]],  # 0,w,h_center
-             [0, 0, 1]], dtype="double")
+             [0, 0, 1]], dtype="double")                     # 0 0 1
 
         # Assuming no lens distortion
         self.dist_coeefs = np.zeros((4, 1))
@@ -196,6 +196,7 @@ class PoseEstimator:
             translation_vector,
             self.camera_matrix,
             self.dist_coeefs)
+        
         return rotation_vector, translation_vector, imgpts
 
     def solve_pose_by_4_points(self, image_points):
@@ -351,6 +352,7 @@ def run(point_list, img):
     for p in points_3:
         cv2.circle(img, (int(p[0]), int(p[1])), 2, (0, 255, 0), -1, 0)
     # print(tuple(pose[2][1].ravel()))
+    print(pose[2])
     cv2.line(img, beint(point_list[0]), beint(
         pose[2][1].ravel()), (0, 255, 0), 3)  # GREEN
     cv2.line(img, beint(point_list[0]), beint(
